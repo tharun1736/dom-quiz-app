@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireless Headphones Review</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef1f6;
+      color: #333;
+      line-height: 1.6;
+    }
+
+   
+    .page {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-areas:
+        "header  header"
+        "sidebar main"
+        "footer  footer";
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    header.site-header { grid-area: header; }
+    aside.sidebar      { grid-area: sidebar; }
+    main.content       { grid-area: main; }
+    footer.site-footer { grid-area: footer; }
+
+    
+    .site-header {
+      background-color: #1a5fb4;
+      color: white;
+      padding: 22px 24px;
+      border-radius: 10px;
+    }
+
+    .site-header .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .site-header .tagline {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    
+    .sidebar {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      align-self: start;
+      position: sticky;
+      top: 20px;
+    }
+
+    .sidebar h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar li {
+      margin-bottom: 8px;
+    }
+
+    .sidebar a {
+      color: #1a5fb4;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    
+    .content {
+      background-color: white;
+      padding: 28px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .blog h1 {
+      font-size: 30px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .info {
+      color: gray;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .blog section {
+      margin-bottom: 28px;
+    }
+
+    .blog section h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .blog ul {
+      padding-left: 22px;
+    }
+
+    .blog li {
+      margin-bottom: 8px;
+    }
+
+    
+    .card {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 30px auto;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .details {
+      padding: 18px;
+      text-align: center;
+    }
+
+    .details h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: green;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 11px;
+      font-size: 16px;
+      color: white;
+      background-color: #1a5fb4;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #134a8f;
+      transform: scale(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    
+    .site-footer {
+      background-color: #222;
+      color: #ddd;
+      text-align: center;
+      padding: 18px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    
+    @media (max-width: 992px) {
+      .page {
+        grid-template-columns: 200px 1fr;
+      }
+      .blog h1 {
+        font-size: 26px;
+      }
+    }
+
+    
+    @media (max-width: 768px) {
+      .page {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main"
+          "sidebar"
+          "footer";
+        grid-template-rows: auto;
+        padding: 12px;
+        gap: 14px;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .content {
+        padding: 18px;
+      }
+
+      .blog h1 {
+        font-size: 24px;
+      }
+
+      .site-header .logo {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+   
+    <header class="site-header">
+      <p class="logo">Tharun&rsquo;s Tech Reviews</p>
+      <p class="tagline">Simple, honest reviews for everyday gadgets</p>
+    </header>
+
+    
+    <aside class="sidebar">
+      <h3>About the Author</h3>
+      <p>Hi, I&rsquo;m M Tharun, a computer science student who likes trying out new gadgets and writing about them.</p>
+
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#">Headphones</a></li>
+        <li><a href="#">Smartphones</a></li>
+        <li><a href="#">Laptops</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </aside>
+
+    
+    <main class="content">
+      <article class="blog">
+
+        <header>
+          <h1>Wireless Headphones Review: Are They Worth It?</h1>
+          <p class="info">By <b>M Tharun</b> | Published on <time datetime="2026-10-20">October 20, 2026</time></p>
+        </header>
+
+        <section>
+          <h2>Introduction</h2>
+          <p>I have been using these wireless headphones for a few weeks now, so I thought I would share my opinion. The product card is below, and after that I wrote what I liked about them.</p>
+        </section>
+
+        <div class="card">
+          <img src=.image/ alt="Black wireless headphones">
+          <div class="details">
+            <h2>Wireless Headphones</h2>
+            <p class="price">&#8377;2,499</p>
+            <button class="btn" type="button">Add to Cart</button>
+          </div>
+        </div>
+
+        <section>
+          <h2>What I Liked</h2>
+          <ul>
+            <li>They are comfortable even after a few hours.</li>
+            <li>The battery lasts for days if you use them normally.</li>
+            <li>Sound is clear for songs and calls.</li>
+            <li>Good price for what you get.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusion</h2>
+          <p>For this price they are a good choice for students and daily use. If you just want a simple and comfortable pair, I think they are worth buying.</p>
+        </section>
+
+      </article>
+    </main>
+
+    
+    <footer class="site-footer">
+      <p>&copy; 2026 Tharun&rsquo;s Tech Reviews. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

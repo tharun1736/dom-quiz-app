@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Quiz</title>
+
+
+  <style>
+    body { font-family: Arial, sans-serif; background: #eef1f6; display: flex; justify-content: center; padding: 30px 16px; }
+    .quiz { width: 100%; max-width: 520px; background: white; padding: 26px; border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,0.12); }
+    .quiz h1 { font-size: 24px; text-align: center; margin-bottom: 16px; }
+    .counter { color: gray; font-size: 14px; margin-bottom: 14px; }
+    .option { display: flex; align-items: center; gap: 10px; padding: 12px; margin-bottom: 10px; border: 2px solid #dde2ea; border-radius: 8px; cursor: pointer; }
+    .option:hover { border-color: #1a5fb4; }
+    .option.selected { border-color: #1a5fb4; background: #e6f0fc; }
+    .error { color: #c01c28; font-size: 14px; min-height: 20px; margin: 4px 0 10px; }
+    button { width: 100%; padding: 12px; font-size: 16px; color: white; background: #1a5fb4; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #134a8f; }
+    .score { font-size: 28px; font-weight: bold; color: #1a7f4b; text-align: center; margin: 12px 0; }
+    .message { text-align: center; margin-bottom: 18px; }
+  </style>
+</head>
+
+<body>
+  
+  <div id="app"></div>
+
+  <script>
+    
+    var questions = [
+      {
+        question: "What does HTML stand for?",
+        options: ["HyperText Markup Language", "High Tech Modern Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+        answer: 0
+      },
+      {
+        question: "Which CSS property changes the text color?",
+        options: ["font-color", "color", "text-color", "background"],
+        answer: 1
+      },
+      {
+        question: "Which keyword creates a variable that cannot be reassigned?",
+        options: ["var", "let", "const", "static"],
+        answer: 2
+      },
+      {
+        question: "Which method adds an item to the end of an array?",
+        options: ["push()", "pop()", "shift()", "add()"],
+        answer: 0
+      }
+    ];
+
+    var current = 0;   
+    var score = 0;
+
+    var app = document.getElementById("app");
+
+   
+    function makeElement(tag, className, text) {
+      var element = document.createElement(tag);
+      if (className) {
+        element.className = className;
+      }
+      if (text) {
+        element.textContent = text;
+      }
+      return element;
+    }
+
+    
+    function clearApp() {
+      while (app.firstChild) {
+        app.removeChild(app.firstChild);
+      }
+    }
+
+    
+    function showQuestion() {
+      clearApp();
+      var q = questions[current];
+
+      var box = makeElement("div", "quiz");
+      box.appendChild(makeElement("h1", "", "JavaScript Quiz"));
+      box.appendChild(makeElement("p", "counter", "Question " + (current + 1) + " of " + questions.length));
+      box.appendChild(makeElement("h2", "", q.question));
+
+      
+      var optionsBox = makeElement("div");
+      for (var i = 0; i < q.options.length; i++) {
+        var label = makeElement("label", "option");
+        var radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "answer";
+        radio.value = i;
+        label.appendChild(radio);
+        label.appendChild(makeElement("span", "", q.options[i]));
+
+        
+        radio.addEventListener("change", highlightSelected);
+        optionsBox.appendChild(label);
+      }
+      box.appendChild(optionsBox);
+
+      var error = makeElement("p", "error");
+      error.id = "error";
+      box.appendChild(error);
+
+      var nextButton = makeElement("button", "", current === questions.length - 1 ? "Finish" : "Next");
+      nextButton.addEventListener("click", goNext);
+      box.appendChild(nextButton);
+
+      app.appendChild(box);
+    }
+
+    function highlightSelected() {
+      var labels = document.querySelectorAll(".option");
+      for (var i = 0; i < labels.length; i++) {
+        labels[i].classList.remove("selected");
+      }
+      var chosen = document.querySelector('input[name="answer"]:checked');
+      chosen.parentNode.classList.add("selected");
+      document.getElementById("error").textContent = "";
+    }
+
+    
+    function goNext() {
+      var chosen = document.querySelector('input[name="answer"]:checked');
+
+   
+      if (chosen === null) {
+        document.getElementById("error").textContent = "Please select an answer before continuing.";
+        return;
+      }
+
+      if (Number(chosen.value) === questions[current].answer) {
+        score = score + 1;
+      }
+
+      current = current + 1;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    
+    function showResult() {
+      clearApp();
+      var box = makeElement("div", "quiz");
+      box.appendChild(makeElement("h1", "", "Quiz Finished!"));
+      box.appendChild(makeElement("p", "score", "You scored " + score + " / " + questions.length));
+
+      var text;
+      if (score === questions.length) {
+        text = "Perfect score! Great job!";
+      } else if (score >= questions.length / 2) {
+        text = "Good work! A little more practice and you will get them all.";
+      } else {
+        text = "Keep practicing, you will get better!";
+      }
+      box.appendChild(makeElement("p", "message", text));
+
+      var again = makeElement("button", "", "Try Again");
+      again.addEventListener("click", function () {
+        current = 0;
+        score = 0;
+        showQuestion();
+      });
+      box.appendChild(again);
+
+      app.appendChild(box);
+    }
+
+    
+    showQuestion();
+  </script>
+</body>
+</html>
